@@ -56,13 +56,17 @@ describe('Shopping List', function() {
     });
     it('should edit an item on put', function(done) {
             chai.request(app)
-            .put('/items/1')
-            .send({'name': 'Spaghetti', 'id': '1'})
+            .put('/items/2')
+            .send({'name': 'Spaghetti', 'id': 2})
             .end(function(err, res) {
-                //should.equal(err, null);
+                should.equal(err, null);
                 res.should.have.status(201);
+                res.should.be.json;
                 res.body.should.be.a('object');
                 res.body.should.have.property('name');
+                res.body.name.should.equal('Spaghetti');
+                storage.items.should.have.length(4);
+                storage.items[2].name.should.equal('Spaghetti');
                 done();
             });
     });

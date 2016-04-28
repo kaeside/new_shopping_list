@@ -29,19 +29,21 @@ Storage.prototype.modify = function(newObject){ //constructor
         for (var arrayIndex in this.items) {
             if (newObject.id === this.items[arrayIndex].id){ // find object to be modify
                 this.items[arrayIndex] = newObject; // passing new value to same object
-                return true;
+                var editedItem = this.items[arrayIndex];
+                return true
             }
         }
 };
 
 var storage = new Storage(); // created an object
 storage.add('Broad beans'); // using add method value to object
-storage.add('Tomatoes');
 storage.add('Peppers');
 storage.add('Cologne');
 
-storage.delete(1);
-console.log(storage);
+
+
+//storage.delete(1);
+//console.log(storage);
 
 var app = express(); // creating a set of setting
 app.use(express.static('public')); // method .use which set the app to public
@@ -74,10 +76,10 @@ app.put('/items/:id', jsonParser, function(req, res) {
     if (!storage.modify(req.body)){
         return res.sendStatus(400);
     } else {
-        res.status(201).json(storage.items);
+        res.status(201).json(storage.items[req.body.id]);
     }
 
-    console.log(storage.items);
+    //.log(storage.items);
 
 });
 
