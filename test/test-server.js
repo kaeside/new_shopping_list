@@ -14,7 +14,7 @@ describe('Shopping List', function() {
             .get('/items')
             .end(function(err, res) {
                 res.should.have.status(200);
-                res.should.be.json;
+                res.should.be.json; //jshint ignore:line
                 res.body.should.be.a('array');
                 res.body.should.have.length(3);
                 res.body[0].should.be.a('object');
@@ -36,7 +36,7 @@ describe('Shopping List', function() {
             .end(function(err, res) {
                 should.equal(err, null);
                 res.should.have.status(201);
-                res.should.be.json;
+                res.should.be.json; //jshint ignore:line
                 res.body.should.be.a('object');
                 res.body.should.have.property('name');
                 res.body.should.have.property('id');
