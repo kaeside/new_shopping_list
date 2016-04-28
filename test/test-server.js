@@ -32,7 +32,9 @@ describe('Shopping List', function() {
     it('should add an item on POST', function(done) {
         chai.request(app)
             .post('/items')
-            .send({'name': 'Kale'})
+            .send({
+                'name': 'Kale'
+            })
             .end(function(err, res) {
                 should.equal(err, null);
                 res.should.have.status(201);
@@ -55,9 +57,12 @@ describe('Shopping List', function() {
             });
     });
     it('should edit an item on put', function(done) {
-            chai.request(app)
+        chai.request(app)
             .put('/items/2')
-            .send({'name': 'Spaghetti', 'id': 2})
+            .send({
+                'name': 'Spaghetti',
+                'id': 2
+            })
             .end(function(err, res) {
                 should.equal(err, null);
                 res.should.have.status(201);
@@ -70,7 +75,19 @@ describe('Shopping List', function() {
                 done();
             });
     });
-    it('should delete an item on delete');
+    it('should delete an item on delete', function(done) {
+        chai.request(app)
+        .delete('/items/0')
+        .send('0')
+        .end(function(err, res) {
+            should.equal(err, null);
+            res.should.have.status(201);
+            res.should.be.json;
+            res.body.should.be.a('array');
+            storage.items.should.have.length(3);
+            done();
+        });
+    });
 });
 
 // function(done) // allows use of done
