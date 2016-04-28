@@ -20,8 +20,8 @@ Storage.prototype.delete = function (id){ //created a delete method
     for (var arrayIndex in this.items) { //created a for in loop that loops through the this.items array
 
         if (id === this.items[arrayIndex].id){ // find proper id and delete it
-            this.items.splice(arrayIndex, 1); // this line splice/deleting the item found
-            return true;
+            var deletedItems = this.items.splice(arrayIndex, 1); // this line splice/deleting the item found
+            return deletedItems[0];
         }
     }
 };
@@ -68,7 +68,7 @@ app.delete('/items/:id', jsonParser, function(req, res) {
     if (!storage.delete(itemId)) { // deleting an item not in storage will shout 400 msg
         return res.sendStatus(400);
     } else {
-        res.status(201).json(storage.items);
+        res.status(201).json(storage.items); // TODO: change to reflect new delete method!
     }
 });
 
