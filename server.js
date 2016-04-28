@@ -84,3 +84,5 @@ app.put('/items/:id', jsonParser, function(req, res) {
 
 
 app.listen(process.env.PORT || 8080);
+
+exports.app = app;
